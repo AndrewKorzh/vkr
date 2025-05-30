@@ -1,0 +1,21 @@
+CORE_SCHEMA_NAME = "wb_core"
+STG_SCHEMA_NAME = "wb_stg"
+DIM_SCHEMA_NAME = "wb_dm"
+
+STORE_TABLE_NAME = "store"
+STORE_PROCESS_TABLE_NAME = "store_process"
+LOG_TABLE_NAME = "log"
+
+STG_CARDS_LIST_TABLE_NAME = "stg_cards_list"
+STG_NM_REPORT_DETAIL_INFO_TABLE_NAME = "stg_nm_report_detail_info"
+STG_NM_REPORT_DETAIL_TABLE_NAME = "stg_nm_report_detail"
+STG_FACT_STOCK_TABLE_NAME = "stg_fact_stock"
+STG_FACT_SALES_INFO_TABLE_NAME = "stg_fact_sales_info"
+STG_FACT_SALES_TABLE_NAME = "stg_fact_sales"
+STG_ADVERT_TYPE_MAPPING_TABLE_NAME = "stg_advert_type_mapping"
+STG_ADVERT_INFO_TABLE_NAME = "stg_advert_info"
+STG_ADVERT_LOAD_INFO_TABLE_NAME = "stg_advert_load_info"
+STG_ADVERT_STAT_TABLE_NAME = "stg_advert_stat"
+SERVICE_HEALTH_TABLE_NAME = "service_health"
+
+DIM_TECH_LIST_TABLE_NAME = "dim_tech"

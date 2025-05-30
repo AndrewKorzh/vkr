@@ -1,0 +1,5 @@
+__pycache__
+*.pyc
+*.pyo
+*.ipynb
+worker_test.ipynb

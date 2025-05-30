@@ -1,0 +1,19 @@
+# Web framework
+fastapi==0.95.2
+uvicorn==0.23.2
+
+# PostgreSQL
+psycopg2-binary
+
+# HTTP requests
+requests
+urllib3
+
+# Google Sheets API
+google-api-python-client
+google-auth
+google-auth-httplib2
+google-auth-oauthlib
+
+# Data handling
+pandas
