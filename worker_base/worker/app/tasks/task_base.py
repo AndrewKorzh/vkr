@@ -61,6 +61,14 @@ class RequestLimiter:
     def block_for_60_seconds(self):
         self.block_until = time.time() + 60
 
+    # def __repr__(self):
+    #     return f"""
+    #     TaskResponse(status={self.status};
+    #                 task_class_identifier = {self.task_class_identifier};
+    #                 store_id = {self.store_id}
+    #                 additional_info='{self.additional_info}')
+    #     """
+
 
 class TaskResponse:
 
@@ -76,9 +84,6 @@ class TaskResponse:
         self.store_id = store_id
         self.task_class_identifier = task_class_identifier
 
-    def __repr__(self):
-        return f"TaskResponse(status={self.status}, task_class_identifier = {self.task_class_identifier}, store_id = {self.store_id} additional_info='{self.additional_info}')"
-
 
 class TaskBase(ABC):
     task_class_identifier: str = None
@@ -89,14 +94,8 @@ class TaskBase(ABC):
             raise TypeError(
                 f"Class {cls.__name__} must define 'task_class_identifier'")
 
-    def __init__(
-        self,
-        db_handler: WorkerDBHandler,
-        logger: WorkerLogger,
-        store_id: int,
-        api_token: str,
-        last_run_time: int,
-    ):
+    def __init__(self, db_handler: WorkerDBHandler, logger: WorkerLogger,
+                 store_id: int, api_token: str, last_run_time: int):
         self.status: TaskStatus = TaskStatus.IN_PROGRESS
         self.db_handler = db_handler
         self.logger = logger
@@ -104,26 +103,19 @@ class TaskBase(ABC):
         self.api_token = api_token
         self.last_run_time = last_run_time
 
-    def _make_response(
-        self,
-        additional_info: str = None,
-    ) -> TaskResponse:
+    def _make_response(self, additional_info: str = None) -> TaskResponse:
         return TaskResponse(
             status=self.status,
             task_class_identifier=self.__class__.task_class_identifier,
             store_id=self.store_id,
-            additional_info=additional_info,
-        )
+            additional_info=additional_info)
+
+    @abstractmethod
+    def process(self) -> TaskResponse:
+        pass
 
     def raise_error(
         self,
         message,
     ):
-        raise TaskError(
-            message,
-            self.__class__.task_class_identifier,
-        )
-
-    @abstractmethod
-    def process(self) -> TaskResponse:
-        pass
+        raise TaskError(message, self.__class__.task_class_identifier)
